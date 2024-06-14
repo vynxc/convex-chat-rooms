@@ -32,7 +32,7 @@
 				}
 			});
 			if (result.ok) {
-				goto('/');
+				window.location.href = '/';
 			} else {
 				alert('Invalid credentials');
 			}
@@ -49,7 +49,7 @@
 				}
 			});
 			if (result.ok) {
-				goto('/');
+				window.location.href = '/';
 			} else {
 				alert('Invalid credentials');
 			}
