@@ -2,7 +2,7 @@
 	"rewrites": [
 		{
 			"source": "/convex/api/:path*",
-			"destination": "https://rightful-shrimp-344.convex.cloud/convex/api/:path*"
+			"destination": "https://rightful-shrimp-344.convex.site/convex/api/:path*"
 		}
 	]
 }
