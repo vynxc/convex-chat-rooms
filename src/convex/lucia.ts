@@ -8,6 +8,8 @@ declare module 'lucia' {
 			{
 				username: string;
 				avatar: string;
+				google_id: string | undefined;
+				github_id: number | undefined;
 			}
 		>;
 		DatabaseUserAttributes: DatabaseUserAttributes;
