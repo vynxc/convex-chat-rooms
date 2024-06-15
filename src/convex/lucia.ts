@@ -17,6 +17,8 @@ declare module 'lucia' {
 interface DatabaseUserAttributes {
 	username: string;
 	avatar: string;
+	google_id: string | undefined;
+	github_id: number | undefined;
 }
 
 export function getAuth(db: DatabaseWriter) {
@@ -24,7 +26,9 @@ export function getAuth(db: DatabaseWriter) {
 		getUserAttributes: (attributes) => {
 			return {
 				username: attributes.username,
-				avatar: attributes.avatar
+				avatar: attributes.avatar,
+				google_id: attributes.google_id,
+				github_id: attributes.github_id
 			};
 		}
 	});
@@ -111,7 +115,7 @@ async function getSession(db: DatabaseReader, sessionId: string): Promise<Databa
 		id: session.id,
 		userId: session.user_id,
 		expiresAt: new Date(session.expires_at),
-		attributes: { test: 'wer' }
+		attributes: {}
 	};
 }
 
@@ -125,7 +129,9 @@ async function getUser(db: DatabaseReader, userId: string): Promise<DatabaseUser
 		id: user.id,
 		attributes: {
 			username: user.username,
-			avatar: user.avatar
+			avatar: user.avatar,
+			google_id: user.google_id,
+			github_id: user.github_id
 		}
 	};
 }

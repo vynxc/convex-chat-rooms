@@ -3,7 +3,14 @@ import { Validator, v } from 'convex/values';
 
 export const schema = defineEntSchema({
 	...authTables({
-		user: { email: v.string(), username: v.string(), avatar: v.string(), password: v.string() },
+		user: {
+			email: v.optional(v.string()),
+			username: v.string(),
+			avatar: v.string(),
+			password: v.optional(v.string()),
+			github_id: v.optional(v.number()), // Optional for GitHub OAuth
+			google_id: v.optional(v.string())
+		},
 
 		session: {}
 	}),

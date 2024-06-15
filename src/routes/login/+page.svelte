@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { hc } from 'hono/client';
-	import { zLogin, zRegister, type auth_router } from '../../convex/http';
+	import { type auth_router } from '../../convex/http';
 	import { goto } from '$app/navigation';
 	let isRegistering = $state(false);
 	let email = $state('');
@@ -15,14 +15,6 @@
 
 	async function auth() {
 		if (isRegistering) {
-			const validRegister = zRegister.safeParse({
-				email,
-				password,
-				username,
-				confirmPassword
-			});
-			if (!validRegister.success) alert('bad data');
-
 			const result = await client.convex.api.auth.signup.$post({
 				json: {
 					email,
@@ -37,11 +29,6 @@
 				alert('Invalid credentials');
 			}
 		} else {
-			const validLogin = zLogin.safeParse({
-				email,
-				password
-			});
-			if (!validLogin.success) throw new Error('Invalid data');
 			const result = await client.convex.api.auth.login.$post({
 				json: {
 					email,
@@ -121,9 +108,12 @@
 			</div>
 		</div>
 	</div>
-	<div class="uk-card-footer">
+	<div class="uk-card-footer flex flex-col items-end gap-2">
 		<button onclick={auth} class="uk-button uk-button-primary w-full">
 			{isRegistering ? 'Register' : 'Sign in'}
+		</button>
+		<button onclick={() => goto('convex/api/auth/github')} class="uk-button uk-button-primary w-32">
+			Continue with GitHub
 		</button>
 	</div>
 </div>

@@ -14,6 +14,9 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as api_auth_github from "../api/auth/github.js";
+import type * as api_auth_login from "../api/auth/login.js";
+import type * as api_auth_register from "../api/auth/register.js";
 import type * as http from "../http.js";
 import type * as lucia from "../lucia.js";
 import type * as tasks from "../tasks.js";
@@ -29,6 +32,9 @@ import type * as withAuth from "../withAuth.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "api/auth/github": typeof api_auth_github;
+  "api/auth/login": typeof api_auth_login;
+  "api/auth/register": typeof api_auth_register;
   http: typeof http;
   lucia: typeof lucia;
   tasks: typeof tasks;

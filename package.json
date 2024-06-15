@@ -38,6 +38,7 @@
 	"type": "module",
 	"dependencies": {
 		"@hono/zod-validator": "^0.2.2",
+		"arctic": "^1.9.1",
 		"argon2-browser": "^1.18.0",
 		"convex": "^1.12.1",
 		"convex-ents": "^0.7.7",

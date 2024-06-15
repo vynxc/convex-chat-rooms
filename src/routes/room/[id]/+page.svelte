@@ -4,6 +4,7 @@
 	import { api } from '../../../convex/_generated/api';
 	import { useSession } from '$lib/auth.svelte';
 	import type { Id } from '../../../convex/_generated/dataModel';
+	import { type Message } from '$lib/types/user';
 
 	let { data } = $props();
 	const client = useConvexClient();
@@ -32,7 +33,7 @@
 		message = '';
 	}
 	$effect(() => {
-		console.log(messagesQuery.data);
+		console.log('messagesQuery.data', JSON.stringify(messagesQuery.data));
 		scrollMessagesToBottom();
 	});
 	function scrollMessagesToBottom() {
@@ -61,7 +62,7 @@
 		<p class="mb-4 text-2xl">{roomQuery.data?.name}</p>
 		<div class="mb-4 w-full space-y-8 rounded-lg">
 			<ul class="space-y-4" id="messages-container">
-				{#each messagesQuery.data as task}
+				{#each messagesQuery.data as Message[] as task}
 					<li class="uk-card flex min-h-24 gap-4 p-4">
 						<img
 							src={task.user.avatar}

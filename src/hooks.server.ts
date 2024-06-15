@@ -14,7 +14,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 		return resolve(event);
 	}
 
-	const user = await client.query(api.users.get, { sessionId });
+	const user = await client.query(api.users.getSessionDetails, { sessionId });
 
 	if (!user.session) {
 		return resolve(event);
