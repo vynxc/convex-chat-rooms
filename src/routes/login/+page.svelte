@@ -108,14 +108,11 @@
 			</div>
 		</div>
 	</div>
-	<div class="uk-card-footer">
+	<div class="uk-card-footer flex flex-col items-end gap-2">
 		<button onclick={auth} class="uk-button uk-button-primary w-full">
 			{isRegistering ? 'Register' : 'Sign in'}
 		</button>
-		<button
-			onclick={() => goto('convex/api/auth/github')}
-			class="uk-button uk-button-primary w-full"
-		>
+		<button onclick={() => goto('convex/api/auth/github')} class="uk-button uk-button-primary w-32">
 			Continue with GitHub
 		</button>
 	</div>
