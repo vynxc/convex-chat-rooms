@@ -82,20 +82,8 @@ export const getRoom = query({
 		}
 	}
 });
-export const getMessagess = queryWithAuth({
-	args: { roomId: v.id('rooms') },
-	handler: async (ctx, args) => {
-		const table = entsTableFactory(ctx, entDefinitions);
-		const messages = await table('messages')
-			.filter((q) => q.eq(q.field('roomId'), args.roomId))
-			.map(async (message) => ({
-				...message,
-				user: await message.edge('user')
-			}));
-		return messages;
-	}
-});
 // Retrieve messages from a specific room
+
 export const getMessages = queryWithAuth({
 	args: { roomId: v.id('rooms') },
 	handler: async (ctx, args) => {
@@ -103,10 +91,17 @@ export const getMessages = queryWithAuth({
 			const table = entsTableFactory(ctx, entDefinitions);
 			return await table('messages')
 				.filter((q) => q.eq(q.field('roomId'), args.roomId))
-				.map(async (message) => ({
-					...message,
-					user: await message.edge('user')
-				}));
+				.map(async (message) => {
+					const user = await message.edge('user');
+					return {
+						...message,
+						user: {
+							avatar: user.avatar,
+							username: user.username,
+							id: user.id
+						}
+					};
+				});
 		} catch (error) {
 			console.error('Error retrieving messages:', error);
 			return { success: false, error: 'Failed to retrieve messages' };
